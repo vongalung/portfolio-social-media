@@ -15,9 +15,6 @@ spring:
     hikari:
       connection-timeout: 60000
       maximum-pool-size: 30
-  sql:
-    init:
-      mode: always
   security:
     oauth2:
       resourceserver:
