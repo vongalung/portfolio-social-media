@@ -22,4 +22,5 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${KEYCLOAK_HOST:http://localhost:9090}/realms/${KEYCLOAK_DEFAULT_REALM_NAME:social_media}
+          issuer-uri: ${KEYCLOAK_HOST:http://localhost:9090/realms/social_media}
+          jwk-set-uri: ${KEYCLOAK_JWKS:http://localhost:9090/realms/social_media/protocol/openid-connect/certs}

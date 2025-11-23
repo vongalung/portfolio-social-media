@@ -18,6 +18,6 @@ public interface UserReactionRepo extends JpaRepository<UserReaction, UUID> {
     Optional<UserReaction> findByContent_IdAndUser_Id(UUID contentId, UUID userId);
 
     @QueryHints(@QueryHint(name = HINT_FETCH_SIZE, value = "1000"))
-    @Query("SELECT ur FROM UserReaction ur WHERE ur.content,id = :contentId")
+    @Query("SELECT ur FROM UserReaction ur WHERE ur.content.id = :contentId")
     Stream<UserReaction> streamByContent(@Param("contentId") UUID contentId);
 }

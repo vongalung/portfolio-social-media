@@ -19,7 +19,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${KEYCLOAK_HOST}/realms/${KEYCLOAK_DEFAULT_REALM_NAME}
+          issuer-uri: ${KEYCLOAK_HOST}
+          jwk-set-uri: ${KEYCLOAK_JWKS}
   threads:
     virtual:
       enabled: true

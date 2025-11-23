@@ -15,5 +15,8 @@ import java.util.UUID;
 @Repository
 public interface PostRepo extends JpaRepository<Post, UUID> {
     @QueryHints(@QueryHint(name = HINT_FETCH_SIZE, value = "1000"))
+    Page<Post> findAll(@Nullable Pageable pageable);
+
+    @QueryHints(@QueryHint(name = HINT_FETCH_SIZE, value = "1000"))
     Page<Post> findByUser_Id(UUID userId, @Nullable Pageable pageable);
 }

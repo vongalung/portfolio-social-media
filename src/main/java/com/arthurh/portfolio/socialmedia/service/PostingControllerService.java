@@ -31,9 +31,15 @@ public class PostingControllerService {
     final UserContentMapper mapper;
 
     @Transactional
-    public Page<SimpleUserContent> getPosts(Pageable pageable) {
+    public Page<SimpleUserContent> getAllPosts(Pageable pageable) {
+        return userContentService.findAllPosts(pageable)
+                .map(mapper::mapToSimpleContent);
+    }
+
+    @Transactional
+    public Page<SimpleUserContent> getSelfPosts(Pageable pageable) {
         var user = controllerHelperService.findAndAuthorizeUser();
-        return userContentService.findByTypeAndUser(user, pageable)
+        return userContentService.findPostsByUser(user, pageable)
                 .map(mapper::mapToSimpleContent);
     }
 

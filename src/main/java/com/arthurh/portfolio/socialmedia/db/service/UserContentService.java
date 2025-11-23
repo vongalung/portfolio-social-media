@@ -22,7 +22,11 @@ public class UserContentService {
     final PostRepo postRepo;
     final CommentRepo commentRepo;
 
-    public Page<Post> findByTypeAndUser(User user, @Nullable Pageable pageable) {
+    public Page<Post> findAllPosts(@Nullable Pageable pageable) {
+        return postRepo.findAll(pageable);
+    }
+
+    public Page<Post> findPostsByUser(User user, @Nullable Pageable pageable) {
         return postRepo.findByUser_Id(user.getId(), pageable);
     }
 

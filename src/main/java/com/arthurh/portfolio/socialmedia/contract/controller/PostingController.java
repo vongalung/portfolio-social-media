@@ -15,6 +15,9 @@ public interface PostingController {
     @GetMapping
     Page<SimpleUserContent> getPosts(Pageable pageable);
 
+    @GetMapping("/self")
+    Page<SimpleUserContent> getSelfPosts(Pageable pageable);
+
     @PostMapping
     ResponseEntity<SimpleUserContent> createPost(@RequestBody NewPost request);
 

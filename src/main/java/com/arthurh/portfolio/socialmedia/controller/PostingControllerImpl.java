@@ -21,7 +21,12 @@ public class PostingControllerImpl implements PostingController {
 
     @Override
     public Page<SimpleUserContent> getPosts(Pageable pageable) {
-        return postingControllerService.getPosts(pageable);
+        return postingControllerService.getAllPosts(pageable);
+    }
+
+    @Override
+    public Page<SimpleUserContent> getSelfPosts(Pageable pageable) {
+        return postingControllerService.getSelfPosts(pageable);
     }
 
     @Override
