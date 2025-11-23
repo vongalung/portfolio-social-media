@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)
 public class SocialMediaApplication {
 
-	public static void main(String[] args) {
+	static void main(String[] args) {
 		SpringApplication.run(SocialMediaApplication.class, args);
 	}
 

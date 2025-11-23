@@ -6,6 +6,7 @@ import static org.slf4j.MDC.remove;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -24,7 +25,7 @@ public class LoggingFilter implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
-                                Exception ex)
+                                @Nullable Exception ex)
             throws Exception {
         onCompletion();
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
