@@ -4,7 +4,7 @@ import static java.util.UUID.randomUUID;
 import static org.apache.commons.io.FilenameUtils.getExtension;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-import com.arthurh.portfolio.socialmedia.config.MinioConfig;
+import com.arthurh.portfolio.socialmedia.config.MinioProperties;
 import com.arthurh.portfolio.socialmedia.service.dto.StreamedFile;
 import io.minio.GetObjectArgs;
 import io.minio.GetObjectResponse;
@@ -23,14 +23,14 @@ public class MinioService {
     private static final long UPLOAD_CHUCK_SIZE = 10 * 1024 * 1024;
 
     final MinioClient client;
-    final MinioConfig config;
+    final MinioProperties properties;
 
     public String uploadFile(StreamedFile file)
             throws MinioException, IOException, GeneralSecurityException {
         var fileId = createFileName(file.originalFileName());
         var args = PutObjectArgs.builder()
-                .bucket(config.bucketName())
-                .object(fileId)
+                .bucket(properties.bucketName())
+                .object(fileBucketPath(fileId))
                 .stream(file.file(),
                         file.contentLength() > 0 ? file.contentLength() : -1,
                         UPLOAD_CHUCK_SIZE)
@@ -50,14 +50,21 @@ public class MinioService {
         if (isBlank(originalFileName)) {
             return fileId;
         }
-        return fileId + getExtension(originalFileName);
+        return String.join(".", fileId, getExtension(originalFileName));
+    }
+
+    String fileBucketPath(String fileId) {
+        if (properties.defaultDirectory() == null) {
+            return fileId;
+        }
+        return String.join("/", properties.defaultDirectory(), fileId);
     }
 
     public GetObjectResponse downloadFile(String fileId) throws MinioException, IOException, GeneralSecurityException {
         return client.getObject(
                 GetObjectArgs.builder()
-                        .bucket(config.bucketName())
-                        .object(fileId)
+                        .bucket(properties.bucketName())
+                        .object(fileBucketPath(fileId))
                         .build());
     }
 

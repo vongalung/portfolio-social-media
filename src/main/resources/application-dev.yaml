@@ -25,6 +25,5 @@ minio:
   endpoint: ${MINIO_URL:http://localhost:9001}
   access-key: ${MINIO_ACCESS:minioadmin}
   secret-key: ${MINIO_SECRET:minioadmin}
-  bucket-name: ${MINIO_DEFAULT_BUCKET:social-media}
-  secure: false
-
+  bucket-name: ${MINIO_DEFAULT_BUCKET:portfolio}
+  default-directory: ${MINIO_DEFAULT_DIRECTORY:social-media}
