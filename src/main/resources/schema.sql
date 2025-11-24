@@ -1,0 +1,5 @@
+BEGIN;
+
+CREATE SCHEMA social_media AUTHORIZATION postgres;
+
+COMMIT;

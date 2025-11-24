@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: portfolio-social-media
+    env: docker
+    dockerfilePath: Dockerfile
+    region: singapore
+    plan: free
+    port: 8080
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: "render"
+      - key: DB_URL
+        value: ${social_media_db.url}
+      - key: DB_UNAME
+        value: ${social_media_db.user}
+      - key: DB_PASS
+        value: ${social_media_db.password}
+      - key: KEYCLOAK_HOST
+        value: "http://..../realms/social_media"
+      - key: KEYCLOAK_JWKS
+        value: "http://..../realms/social_media/protocol/openid-connect/certs"
+  - type: web
+      name: social_media_db
+      image: postgres:16
+      region: singapore
+      plan: free
+      envVars:
+        - key: POSTGRES_DB
+          value: social_media_db
+        - key: POSTGRES_USER
+          value: social_media
+        - key: POSTGRES_PASSWORD
+          value: 12345
+      disk:
+        name: postgres-data
+        mountPath: /var/lib/postgresql/data
+        sizeGB: 10
