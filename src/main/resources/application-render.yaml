@@ -12,3 +12,9 @@ spring:
         jwt:
           issuer-uri: ${KEYCLOAK_HOST}
           jwk-set-uri: ${KEYCLOAK_JWKS}
+minio:
+  endpoint: ${MINIO_URL}
+  access-key: ${MINIO_ACCESS}
+  secret-key: ${MINIO_SECRET}
+  bucket-name: ${MINIO_DEFAULT_BUCKET:social-media}
+  secure: false

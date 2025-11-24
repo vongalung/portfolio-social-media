@@ -19,6 +19,12 @@ services:
         value: "http://..../realms/social_media"
       - key: KEYCLOAK_JWKS
         value: "http://..../realms/social_media/protocol/openid-connect/certs"
+      - key: MINIO_URL
+        value: ${social_media_minio.url}
+      - key: MINIO_ACCESS
+        value: "minioadmin"
+      - key: MINIO_SECRET
+        value: "minioadmin"
   - type: web
       name: social_media_db
       image: postgres:16
@@ -35,3 +41,25 @@ services:
         name: postgres-data
         mountPath: /var/lib/postgresql/data
         sizeGB: 10
+  - type: web
+      name: social_media_minio
+      env: docker
+      image: minio/minio:latest
+      region: singapore
+      plan: free
+      ports:
+        - port: 9000
+          protocol: http
+        - port: 9001
+          protocol: http
+      command: [ "minio", "server", "/data", "--console-address", ":9001" ]
+      disks:
+        - name: minio-data
+          mountPath: /data
+          sizeGB: 10
+      envVars:
+        - key: MINIO_ROOT_USER
+          value: minioadmin
+        - key: MINIO_ROOT_PASSWORD
+          value: minioadmin
+      autoDeploy: true

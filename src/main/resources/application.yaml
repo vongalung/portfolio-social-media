@@ -27,3 +27,9 @@ spring:
 logging:
   pattern:
     console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr([request.id=%X{request.id}]) %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+minio:
+  endpoint: ${MINIO_URL}
+  access-key: ${MINIO_ACCESS}
+  secret-key: ${MINIO_SECRET}
+  bucket-name: ${MINIO_DEFAULT_BUCKET:social-media}
+  secure: false

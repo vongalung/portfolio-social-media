@@ -21,3 +21,10 @@ spring:
         jwt:
           issuer-uri: ${KEYCLOAK_HOST:http://localhost:9090/realms/social_media}
           jwk-set-uri: ${KEYCLOAK_JWKS:http://localhost:9090/realms/social_media/protocol/openid-connect/certs}
+minio:
+  endpoint: ${MINIO_URL:http://localhost:9001}
+  access-key: ${MINIO_ACCESS:minioadmin}
+  secret-key: ${MINIO_SECRET:minioadmin}
+  bucket-name: ${MINIO_DEFAULT_BUCKET:social-media}
+  secure: false
+
