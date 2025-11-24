@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_URL}?autoReconnect=true;
+    username: ${DB_UNAME}
+    password: ${DB_PASS}
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 30
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_HOST}
+          jwk-set-uri: ${KEYCLOAK_JWKS}
